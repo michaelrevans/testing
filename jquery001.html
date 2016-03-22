@@ -1,0 +1,173 @@
+<html>
+<head>
+	<title>jQuery sample 1</title>
+	<style type="text/css">
+	 .myclass { color: #FA5858;	font-size: 25px;}  
+	 #my-div {border: 30px solid black; margin: 20px;}
+	 #click-me {cursor: pointer;}
+	 .success {border: 2px solid green;}
+	 .failure {border: 2px solid #FA5858;}
+	 .focus {border: 2px solid blue;}
+	 .dbl {background-color: blue; cursor: pointer;}
+	</style>
+</head>
+<body>
+	<select id="myselect">
+    	<option value="1">Option-1</option>
+		<option value="2">Option-2</option>
+		<option value="3">Option-3</option>
+	</select>
+	<form>
+ 		<input type="radio" name="sex" value="male">Male<br>
+ 		<input type="radio" name="sex" value="female">Female<br>
+ 		What's your name? <input type="text" name="name" placeholder="is it fool?"><br>
+ 		What's your age? <input type="number" name="age" placeholder="are you a lil bitch?">
+ 	</form>
+
+ 	<ul>
+		<li>Html Tutorial</li>
+		<li>Mongodb Tutorial</li>
+		<li>Python Tutorial</li>
+	</ul>
+
+	<div>
+		<a href="www.w3resource.com/sqlite/" id='tut'>SQLite Tutorial</a>
+		<p>jQuery Exercises</p>
+		<p>and Solution.</p>
+	</div>
+	<div id="my-div" class="myclass">
+		<h1>Hello world</h1>
+		<h2>Goodbye cruel world!</h2>
+		<h3>Hello again, I'm back! Yayyy!!!</h3>
+	</div>
+
+	<button id="click-me">Click on meeeeeeeee</button>
+
+	<div id="my-div2"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(function() {
+
+	$(document).on('click', function(evt) {
+		var xpos = evt.clientX;
+		var ypos = evt.clientY;
+		console.log("(" + xpos + ", " + ypos + ")");
+	});
+
+
+	$('li').on('dblclick', function() {
+		$(this).toggleClass('dbl');
+	});
+
+
+	$('h1, h2, h3').on('click', function() {
+		$(this).clone(true).appendTo($('.myclass'));
+	});
+
+
+	var mydiv2 = $('#my-div2')
+	var inputs = $('input');
+	inputs.on('blur', function() {
+		var error;
+		$(this).val().length > 0 ? error = "success" : error = "failure";
+		$(this).attr('class', error);
+	});
+
+	inputs.on('focus', function() {
+		$(this).attr('class', 'focus');
+	});
+
+	inputs.on('change', function() {
+		var newp = "<p>Hello there mate</p>";
+		mydiv2.append(newp);
+	});
+
+	$('#click-me').on('click', function() {
+		mydiv2.empty();
+	});
+
+/*
+	var button = $('#click-me');
+	var div2 = $('#my-div2');
+
+	button.on('click', function() {
+		var singlep = $('<p>Single click init mate</p>');
+		div2.append(singlep);
+	});
+
+	button.on('dblclick', function() {
+		var dblp = $('<p>Doubleee up!</p>');
+		div2.append(dblp);
+		button.off('click');
+	});
+
+	var mydiv = $('#my-div');
+	console.log("left offset " + mydiv.offset().left);
+	console.log("left position " + mydiv.position().left);
+
+	var hasIt = $('#my-div').hasClass('myclass');
+
+	var no2 = $('#my-div2');
+	hasIt ? no2.text("Yes it does") : no2.text("No it doesnt");
+
+
+
+	console.log("Inner height is " + $('#my-div').innerHeight());
+	console.log("Outer height is " + $('#my-div').outerHeight(true));
+	console.log("Inner width  is " + $('#my-div').innerWidth());
+	console.log("Outer width  is " + $('#my-div').outerWidth(true));
+
+	$('#myselect').on('change', function() {
+		var selected = $('#myselect :selected').text();
+		console.log(selected);
+	});
+	var $male = $('input[value="male"]');
+	$male.prop('checked', true);
+	// console.log($male);
+
+	var $newDiv = "<div class=new><h1>JQuery Core</h1></div>";
+	$('body').append($newDiv);
+
+	var $body = $('body');
+
+	$(document).on("click", ".new", function() {
+		$body.append($newDiv);
+	});
+
+
+	var listLi = $('li');
+	for (var i = 0; i < listLi.length; i++) {
+		listLi[i].innerHTML = "<b>" + i + ".</b> " + listLi[i].innerHTML;
+		console.log(i);
+	}
+
+
+	var link = $('#tut');
+	link.attr('href', "www.mikethejuggler.com");
+	console.log(link[0].innerHTML);
+	link[0].innerText = "Mike the juggler";
+	console.log(link[0].innerHTML);
+
+
+	var bgclr = $('ul').css('background-color');
+	console.log(bgclr);
+
+
+
+	$('p').addClass('myclass');	
+
+	console.log("Div width is: " + $('div#my-div').height());
+
+
+	var mydiv = $('#my-div');
+	mydiv.scrollTop(0);
+	$('#my-div2').text(mydiv.scrollTop() + " " + mydiv.scrollLeft());
+*/
+});
+
+
+
+</script>
+</body>
+</html>
