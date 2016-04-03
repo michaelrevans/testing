@@ -1,16 +1,19 @@
 <html>
 <head>
 	<title>jQuery sample 1</title>
-	<style type="text/css">
-	 .myclass { color: #FA5858;	font-size: 25px;}  
+	<style type="text/css"> 
 	 #my-div {border: 30px solid black; margin: 20px;}
+	 #my-div2 {position: absolute; background-color: #0ee; height: 70px; width: 70px; top: 0; left: 0; z-index: 2;}
 	 #click-me {cursor: pointer;}
 	 .success {border: 2px solid green;}
 	 .failure {border: 2px solid #FA5858;}
-	 .focus {border: 2px solid blue;}
+	 .focus {border: 2px solid #eeeeee; background-color: #eeeeee;}
+	 .nofocus {border: 2px solid #ccccff;}
 	 .dbl {background-color: blue; cursor: pointer;}
-	 #btn-changer {width: 70px; height: 20px; padding: 3px;}
-	 #to-change {width: 50px; height: 50px; margin: 5px; padding: 0;}
+	 #btn-changer {width: 200px; height: 20px; padding: 3px;}
+	 #to-change {width: 200px; height: 200px; margin: 5px; padding: 0;}
+	 #colour-input {width: 200px;}
+	 #new-page {}
 	</style>
 </head>
 <body>
@@ -20,9 +23,9 @@
 		<option value="3">Option-3</option>
 	</select>
 	<form>
- 		<input type="radio" name="sex" value="male">Male<br>
- 		<input type="radio" name="sex" value="female">Female<br>
- 		What's your name? <input type="text" name="name" placeholder="enter text"><br>
+ 		What's your name? <input type="text" name="name" placeholder="enter text" maxlength="15">
+ 		<span id="chars">15</span> characters remaining
+ 		<br>
  		What's your age? <input type="number" name="age" placeholder="enter num">
  	</form>
 
@@ -36,27 +39,184 @@
 		<a href="www.w3resource.com/sqlite/" id='tut'>SQLite Tutorial</a>
 		<p>jQuery Exercises</p>
 		<p>and Solution.</p>
-		<button id="btn-changer">I like to change</button>
+		<label for="colour">Enter colour:</label><br>
+		<input id="colour-input" type="text" placeholder="Enter colour e.g. blue or #fff"><br>
+		<button id="btn-changer">I like to change</button><br>
 		<div id="to-change"></div>
 	</div>
 	<div id="my-div" class="myclass">
 		<h1>Hello world</h1>
 		<h2>Goodbye cruel world!</h2>
-		<h3>Hello again, I'm back! Yayyy!!!</h3>
+		<h3>Hello again, <span class="blink">I'm back!</span> Yayyy!!!</h3>
 	</div>
 
-	<button id="click-me">Click on meeeeeeeee</button>
-
+	<button id="click-me">start animation</button>
+	<button id="stop">stop animation</button>
 	<div id="my-div2"></div>
+
+	<div id="new-page"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script type="text/javascript">
 
+
+
+
 $(function() {
+
+	$($('*').text().split(' ')[0]).css({fontWeight: 'bold'});
+
+
+
+
+/*
+	function showChars() {
+		var totalChars = $('[name="name"]').eq(0).val().length;
+		console.log(totalChars);
+		$('#chars').text(15 - totalChars);
+		console.log($('#chars').text());
+	};
+
+	$('[name="name"]').eq(0).on('keyup', showChars);
+
+	function blink_text() {
+		$('.blink').fadeOut('500');
+		$('.blink').fadeIn('500');
+	}
+	setInterval(blink_text, 1000)
+
+	$(document).on('contextmenu', function(e) {
+		return false;
+	});
+
+	$('#click-me').on('click', function() {
+		$('body').animate({scrollTop: '0'}, 300);
+	});
+
+	console.log(typeof jQuery);
+
+	$('#click-me').on('click', function() {
+		$('div').toggle('slow');
+	});
+
+	$(':hidden').delay(2000).show(20000);
+
+	$('p').animate({opacity: '0.1'}, 500).animate({opacity: '1'}, 5000)
+
+	$('div').fadeOut(0).delay(2000).fadeIn(4000);
+
+	function goback(speed) {
+		$('#my-div2').animate({top: '0px', left: '0px'}, speed);
+	}
+
+	$('#click-me').on('click', function() {
+		var speed = 3000;
+		// some action
+		goback(speed);
+	});
+
+	$('#stop').on('click', function() {
+		$('#my-div2').stop();
+	});
+
+
+	$('.myclass').animate({height: '300px', width: '300px', opacity: 0}, 2000);
+
+	$(window).on('resize', function(evt) {
+		console.log(window.innerWidth);
+	});
+
+
+	$(document).on('mouseup', function() {
+		console.log('mouseup');
+	});
+
+	$(document).on('mousedown', function() {
+		console.log('mousedown');
+	});
+
+	var lis = $('div');
+	console.log(lis.length);
+
+
+	$('input').on('focus', function() {
+		$(this).removeAttr('class').addClass('focus');
+	});
+
+	$('input').on('blur', function() {
+		$(this).removeAttr('class').addClass('nofocus');
+	});
+
+	console.log($('input').first().is(':focus'));
+	$('input').first().focus();
+	console.log($('input').first().is(':focus'));
+
+	$('input').first().focus();
+	console.log($('input').first());
+
+	$('#colour-input').on('keypress', function(evt) {
+		console.log(String.fromCharCode(evt.which));
+	});	
+
+	$('h1').on('click', function(evt) {
+		console.log(evt.type);
+	});
+
+
+	var count = 0;
+	var start, end;
+	$('p.myclass').on('click', function(evt) {
+		if (count === 0) {
+			start = evt.timeStamp;
+			count ++
+			console.log('start: ' + start);
+		} else {
+			end = evt.timeStamp;
+			run_time = end - start;
+			console.log('run time: ' + run_time);
+			start = evt.timeStamp;
+		}
+		
+	});
+
+
+	$('a').on('click', function() {
+		return "hello";
+	});
+
+
+	$('.myclass').on('click', function() {
+		console.log($(this).prop('tagName'));
+	});
+
+
+	$('a').on('click', function(evt) {
+		evt.preventDefault();
+		console.log(evt.result);
+	});
+
+	$('#colour-input').on('change', function() {
+		var field_to_check = $('#colour-input');
+		if (field_to_check.val() && $.type(field_to_check.val()) === "string") {
+			$('[name="name"], [name="age"]').removeAttr('disabled');
+			console.log("re-enabled");
+		} else {
+			$('[name="name"], [name="age"]').attr('disabled', 'true').removeClass().val('');
+			console.log("disabled");
+		}
+
+	});
+
+
+	$('#btn-changer').on('click', function() {
+		var colour = $('#colour-input').val();
+		// console.log(colour);
+		$('#to-change').css('background-color', colour);
+	});
 
 	$(document).on('click', function(evt) {
 		var xpos = evt.clientX;
 		var ypos = evt.clientY;
-		console.log("(" + xpos + ", " + ypos + ")");
+		// console.log("(" + xpos + ", " + ypos + ")");
 	});
 
 
@@ -64,12 +224,12 @@ $(function() {
 		$(this).toggleClass('dbl');
 	});
 
-
+*/
 	$('h1, h2, h3').on('click', function() {
 		$(this).clone(true).appendTo($('.myclass'));
 	});
 
-
+/*
 	var mydiv2 = $('#my-div2')
 	var inputs = $('input');
 	inputs.on('blur', function() {
@@ -91,12 +251,11 @@ $(function() {
 		mydiv2.empty();
 	});
 
-/*
 	var button = $('#click-me');
 	var div2 = $('#my-div2');
 
 	button.on('click', function() {
-		var singlep = $('<p>Single click init mate</p>');
+		var singlep = $('<p>Single click</p>');
 		div2.append(singlep);
 	});
 
@@ -157,8 +316,6 @@ $(function() {
 	var bgclr = $('ul').css('background-color');
 	console.log(bgclr);
 
-
-
 	$('p').addClass('myclass');	
 
 	console.log("Div width is: " + $('div#my-div').height());
@@ -168,9 +325,9 @@ $(function() {
 	mydiv.scrollTop(0);
 	$('#my-div2').text(mydiv.scrollTop() + " " + mydiv.scrollLeft());
 */
+
+	$('#my-div2').animate({top: '300px', left: '1000px'}, 300);
 });
-
-
 
 </script>
 </body>
