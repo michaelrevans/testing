@@ -1,0 +1,121 @@
+   <head>
+    <style type="text/css">
+
+    .hold   {background: green;
+         width: 100%;
+         height: 100vh;
+         margin: 0 auto;
+         float: left;
+         position: absolute;
+         z-index: 0;
+         }
+
+.int    {
+         width: 100%;
+         height: 100vh;
+         float:left;
+         display: none;
+         }
+
+#i1 {background: red;
+     }
+
+#i2 {background: blue;
+     }
+
+#i3 {background: orange;
+     }                  
+
+
+#b1 {background: purple;
+         height: 50px;
+         width: 80px;
+         float: left;
+         }
+
+#b2 {background: purple;
+         height: 50px;
+         width: 80px;
+         float: left;
+         }  
+
+#b3 {background: purple;
+         height: 50px;
+         width: 80px;
+         float: left;
+         }           
+
+
+.banner {width: 100%;
+         height: 70px;
+         background: purple;
+         margin: 0px auto;
+         z-index:3;
+         float: left;
+         display: inline-block;
+         position: absolute;
+         bottom: 15px;
+         }                                           
+
+*   {margin: 0; 
+    }
+
+
+    </style>
+
+   </head>
+
+
+
+
+
+    <body>
+
+    <div class="banner">
+                <button id="b1" data-intId="#i1">
+                </button>
+                <button id="b2" data-intId="#i2">
+                </button>
+                <button id="b3" data-intId="#i3">
+                </button>               
+    </div>
+
+        <div class="hold" id="hold1">
+            <div class="int" id="i1">
+            </div>
+            <div class="int" id="i2">
+            </div>
+            <div class="int" id="i3">
+            </div>                      
+        </div>
+    </div>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+        var ints = $('.int'); // I'm not really sure what 'int' refers to
+        var buttons = $('button'); // could be changed if more buttons added later, maybe using a class, like int
+
+        buttons.mouseenter(function () {
+            var newInt = $(this).attr('data-intId');
+            console.log($(this))
+            $(newInt).fadeIn(1000);
+        });
+
+        buttons.mouseout(function() {
+            if (ints.is(":visible")) {
+                ints.fadeOut(300);
+            }
+        })
+          
+
+
+
+    });
+</script>
+</body>
