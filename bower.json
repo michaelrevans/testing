@@ -1,0 +1,21 @@
+{
+  "name": "testing",
+  "description": "testing repo for random files",
+  "main": "index.html",
+  "authors": [
+    "Michael Evans"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/michaelrevans/testing",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.2"
+  }
+}

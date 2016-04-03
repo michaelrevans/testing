@@ -1,0 +1,26 @@
+{
+  "name": "testing",
+  "version": "1.0.0",
+  "description": "testing repo for random files",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelrevans/testing.git"
+  },
+  "author": "Michael Evans",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelrevans/testing/issues"
+  },
+  "homepage": "https://github.com/michaelrevans/testing#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^1.0.0"
+  },
+  "dependencies": {
+    "grunt-contrib-concat": "^1.0.0"
+  }
+}
